@@ -1,0 +1,18 @@
+
+###############################################################################################
+#                               VPN Gateway
+#################################################################################################
+
+    - name: Create a new vgw attached to a specific VPC
+      local_action:
+        module: ec2_vpc_vgw
+        state: present
+        region: "{{ region }}"
+       # profile: personal
+        vpc_id: "{{ vpc_id }}"
+        name: IAAC-testing
+        type: ipsec.1
+      register: IAAC_vgw
+
+
+

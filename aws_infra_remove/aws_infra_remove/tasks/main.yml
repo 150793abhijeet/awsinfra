@@ -1,0 +1,9 @@
+- include: auto_scaling
+- include: launch_configuration
+- include: load_balancer
+- include: internet_gateway
+- include: virtual_gateway
+- include: sns_topic
+- include: sqs_service
+- include: security_group
+- include: vpc 

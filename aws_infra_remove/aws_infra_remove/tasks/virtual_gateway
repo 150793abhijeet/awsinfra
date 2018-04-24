@@ -1,0 +1,12 @@
+##########################################################################################################
+##                       removing virtual gateway
+################################################################################################################
+
+- name: Remove virtual gateway
+  local_action:
+    module: ec2_vpc_vgw
+    vpc_id: "{{ vpc_id }}"
+    state: "absent"
+    region: "{{ region }}"
+    name: IAAC-testing
+    type: ipsec.1

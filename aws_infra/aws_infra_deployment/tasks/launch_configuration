@@ -1,0 +1,25 @@
+###############################################################################
+#                       Launch configuration for machines
+###############################################################################
+
+    - name: create launch config
+      local_action:
+        module:      ec2_lc
+        name: "{{ app_name }}"
+        image_id: "{{ image }}"
+        key_name: "{{ keypair }}"
+        region: "{{ region }}"
+        security_groups: "{{ IAAC_security.group_id }}"
+        instance_type: "{{ instance_type }}"
+        assign_public_ip: yes
+        volumes:
+      #  - device_name: /dev/sda1
+       #   volume_size: "{{ vol_size }}"
+      #    device_type: "io1"               # it can be io1 or GP2 or SC1 ST1 or magnetic
+        #  iops: "{{ iops }}"
+      #    delete_on_termination: true
+      #    encrypted: true
+        - device_name: /dev/sdb
+          ephemeral: ephemeral0
+      tags: launch_config
+

@@ -1,0 +1,23 @@
+#############################################################################################
+#                                     Creating  VPC
+#############################################################################################
+
+    - name: Create VPC
+      local_action:
+        module: ec2_vpc_net
+        name: "{{ vpc_name }}"
+        cidr_block: "{{ vpc_cidr_block }}"
+        region: "{{ region }}"
+        state: present
+        resource_tags:
+          Name: IAAC_VPC
+     # with_items: "{{vpc_name}}"
+      register: vpc_IAAC
+
+# Using the set_fact module to save the id of the VPC in a new variable.
+
+    - name: Set vpc id
+      local_action:
+        module: set_fact
+        vpc_id: "{{ vpc_IAAC.vpc.id }}"
+

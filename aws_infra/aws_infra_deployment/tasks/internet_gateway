@@ -1,0 +1,21 @@
+################################################################################################
+#                               Internet Gateway
+#################################################################################################
+
+
+# Every VPC needs at least one Internet Gateway.
+# # This component allows traffic between the VPC and the outside world.
+#
+    - name: Create Internet Gateway for VPC
+      local_action:
+        module: ec2_vpc_igw
+        vpc_id: "{{ vpc_id }}"
+        region: "{{ region }}"
+        state: "present"
+      register: IAAC_igw
+# We save the id of the Internet Gateway in a new variable.
+#
+    - name: Set Internet Gateway ID in variable
+      local_action:
+        module: set_fact
+        IAAC_igw_id: "{{ IAAC_igw.gateway_id }}"

@@ -1,0 +1,16 @@
+##################################################################################################
+
+- name: Delete Security group
+  local_action:
+    module: ec2_group
+    name: "{{ security_group }}"
+    vpc_id: "{{ vpc_id }}"
+    region: "{{ region }}"
+    state: "absent"
+######################################################################
+#                       delay
+##########################################################################
+
+- name: sleep for 100 seconds and continue with play
+  wait_for: timeout=100
+  delegate_to: localhost

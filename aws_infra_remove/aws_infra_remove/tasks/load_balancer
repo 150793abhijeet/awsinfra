@@ -1,0 +1,18 @@
+#################################################################################################
+#                                deleting load balancer
+##############################################################################################
+
+- name: delete load balancer
+  local_action:
+    module: ec2_elb_lb
+    name: "{{ app_name }}"
+    region: "{{ region }}"
+    state: "absent"       
+
+######################################################################
+#                       delay
+##########################################################################
+                       
+- name: sleep for 130 seconds and continue with play
+  wait_for: timeout=130
+  delegate_to: localhost

@@ -1,0 +1,65 @@
+---
+vpc_name: IAAC_vpc1
+
+vpc_cidr_block: 10.0.0.0/16
+
+my_ip: 10.0.0.0
+
+public_subnet_1_cidr:  10.0.0.0/24
+
+private_subnet_1_cidr: "10.0.1.0/24"
+
+instance_type: t2.micro
+
+security_group: IAAC
+
+image:  ami-586fdf37
+
+region: eu-central-1
+
+keypair: IAAC_Frankfut
+
+count: 1
+
+ec2_tag_Environment: test
+
+ec2_volume_size: 16
+
+subnet_ids1:  public_IAAC_az1_id  
+
+subnet_ids2:  public_IAAC_az2_id 
+
+ec2_tag_Name: IAAC_test
+
+ec2_tag_Type: Server
+
+ec2_tag_Environment: test
+
+app_name: IAAC
+
+#vpc_id: vpc-b66779de
+
+sec_group_rules: 
+- proto: tcp
+  from_port: 80
+  to_port: 80
+  cidr_ip: 0.0.0.0/0
+- proto: tcp
+  from_port: 0
+  to_port: 65535
+  group_name: "{{ app_name }}"
+- proto: udp
+  from_port: 0
+  to_port: 65535
+  group_name: "{{ app_name }}"
+- proto: icmp
+  from_port: 0
+  to_port: 0
+  group_name: "{{ app_name }}"
+
+min_size: 1
+
+desired_capacity: 3
+
+max_size: 4
+

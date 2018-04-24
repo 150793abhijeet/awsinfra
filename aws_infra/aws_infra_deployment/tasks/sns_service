@@ -1,0 +1,39 @@
+##################################################################################################################################
+#                               Create a SNS Topic for SNS service
+##################################################################################################################################
+
+    - name: Create alarm SNS topic
+      local_action:
+        module: sns_topic
+        name: "IAAC_sns"
+        region: "{{ region }}"
+        state: "present"
+        display_name: "alarm SNS topic"
+        delivery_policy:
+          http:
+            defaultHealthyRetryPolicy:
+                minDelayTarget: 2
+                maxDelayTarget: 4
+                numRetries: 3
+                numMaxDelayRetries: 1
+                backoffFunction: "linear"
+            disableSubscriptionOverrides: True
+            defaultThrottlePolicy:
+                maxReceivesPerSecond: 10
+        subscriptions:
+          - endpoint: "abhijeet.t@hcl.com"
+            protocol: "email"
+########################################################################################33###########################################
+###                               SNS Services
+########################################################################################################################################3#
+
+    - name: Send notification messages via SNS with short message for SMS
+      local_action:
+        module: sns
+        msg: 'play has completed.'
+        region: "{{ region }}"
+        sms: "deployed!"
+        subject: "Deploy complete!"
+        topic: "IAAC_sns"
+      delegate_to: localhost
+      register: "IAAC_sns"

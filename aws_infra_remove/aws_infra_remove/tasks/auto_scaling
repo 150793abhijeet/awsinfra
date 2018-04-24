@@ -1,0 +1,18 @@
+#####################################################################################################################33
+#               deleting auto scaling group
+####################################################################################################################
+               
+- name: delete autoscale groups
+  local_action:
+    module: ec2_asg
+    name: "{{ app_name }}"
+    load_balancers: "{{ app_name }}"
+    launch_config_name: "{{ app_name }}"
+    min_size: "0"
+    max_size: "0"
+    desired_capacity: "0"
+    region: "{{ region }}"
+    health_check_type: EC2
+    health_check_period: 300
+    state: "absent"
+  register: "IAAC_Scaling_group"

@@ -1,0 +1,18 @@
+####################################################################################################################
+#                                               SQS service enabling
+#####################################################################################################################
+
+    - name: Launch SQS service
+      local_action:
+        module: sqs_queue
+        name: "IAAC_queue"
+        region: "{{ region }}"
+        default_visibility_timeout: 120
+        message_retention_period: 86400
+        maximum_message_size: 1024
+        delivery_delay: 30
+        receive_message_wait_time: 20
+       # policy: "{{ json_dict }}"
+   # redrive_policy:
+    #  maxReceiveCount: 5
+     # deadLetterTargetArn: arn:aws:sqs:eu-west-1:123456789012:my-dead-queue

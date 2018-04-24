@@ -1,0 +1,11 @@
+- include: vpc_creation
+- include: vpn_gateway 
+- include: subnet_creation
+- include: internet_gateway
+- include: route_table
+- include: security_groups
+- include: sqs_service
+- include: load_balancer
+- include: launch_configuration
+- include: autoscaling
+- include: sns_service

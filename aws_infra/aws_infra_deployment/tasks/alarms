@@ -1,0 +1,48 @@
+###############################################################################
+#                       Creating Scale down alarm
+###############################################################################
+#    - name: create scale down alarm
+#      local_action:
+#        module: ec2_metric_alarm
+#        state: present
+#        region: "{{ region }}"
+##        name: "cpu-low"
+##        metric: CPUUtilization
+#        namespace: "AWS/EC2"
+#        statistic: Average
+#        comparison: "<="
+ #       threshold: 20.0
+ #       period: 300
+#        evaluation_periods: 3
+#        unit: "Percent"
+#        description: "This will alarm when cpu usage average is lower than 10% for 15 minutes "
+#        dimensions:
+#          AutoScalingGroupName: "{{ app_name }}"
+#        alarm_actions:
+#          - "{{ scale_down_policy.arn }}"
+#      tags: alarm
+
+##########################################################################
+#                       Scale up alarm
+###############################################################################
+
+#    - name: create scale up alarm
+#      local_action:
+#        module: ec2_metric_alarm
+#        state: present
+#        region: "{{ region }}"
+#        name: "cpu-high"
+#        metric: CPUUtilization
+#        namespace: "AWS/EC2"
+#        statistic: Average
+#        comparison: ">="
+#        threshold: 65.0
+#        period: 300
+#        evaluation_periods: 3
+#        unit: "Percent"
+#        description: "This will alarm when cpu usage average is higher than 90% for 15 minutes "
+#        dimensions:
+#          AutoScalingGroupName: "{{ app_name }}"
+#        alarm_actions:
+#          - "{{ scale_up_policy.arn }}"
+#      tags: alarm

@@ -1,0 +1,36 @@
+###########################################################################################################
+#                               Setting up route tables for private subnet
+###########################################################################################################
+#
+    - name: Set up private subnet route table
+      local_action:
+        module: ec2_vpc_route_table
+        vpc_id: "{{ vpc_id }}"
+        region: "{{ region }}"
+        tags:
+          Name: Public
+        subnets:
+          - "{{ private_IAAC_az1_id }}"
+          - "{{ private_IAAC_az2_id }}"
+        routes:
+          - dest: 0.0.0.0/0
+      register: vpc_route_private
+
+########################################################################################################################
+##                       Setting up route table for Public subnet
+#################################################################################################################################
+
+    - name: Set up public route table
+      local_action:
+        module: ec2_vpc_route_table
+        vpc_id: "{{ vpc_id }}"
+        region: "{{ region }}"
+        tags:
+          Name: Private
+        subnets:
+          - "{{ public_IAAC_az1_id }}"
+          - "{{ public_IAAC_az2_id }}"
+        routes:
+          - dest: "0.0.0.0/0"
+            gateway_id: "{{ IAAC_igw_id }}"
+      register: vpc_route_public

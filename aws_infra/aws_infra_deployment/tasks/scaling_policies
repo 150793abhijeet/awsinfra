@@ -1,0 +1,34 @@
+##############################################################################
+#               creating scale down policy
+##############################################################################
+#    - name: create scale down  policy
+#      local_action:
+#        module: ec2_scaling_policy
+#        state: present
+#        region: "{{ region }}"
+#        name: scale-down-policy
+#        adjustment_type: ChangeInCapacity
+#        asg_name: "{{ app_name }}"
+#        scaling_adjustment: -1
+#        min_adjustment_step: -1
+#        cooldown: 300
+#      register: scale_down_policy
+#      tags: scaling_policy
+
+##############################################################################
+#                               Creating scale up policy
+#############################################################################3#
+
+#    - name: create scale up policy
+#      local_action:
+#        module: ec2_scaling_policy
+#        state: present
+#        region: "{{ region }}"
+#        name: scale-up-policy
+#        adjustment_type: ChangeInCapacity
+#        asg_name: "{{ app_name }}"
+#        scaling_adjustment: 1
+#        min_adjustment_step: 1
+#        cooldown: 300
+#      register: scale_up_policy
+#      tags: scaling_policy

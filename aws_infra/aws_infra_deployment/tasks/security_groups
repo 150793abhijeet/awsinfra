@@ -1,0 +1,46 @@
+################################################################################################################################
+#                                               Creating  a security group
+###########################################################################################################################33
+    - name: Create Security group
+      local_action:
+        module: ec2_group
+        name: "{{ security_group }}"
+        description: Security Group for Servers
+        vpc_id: "{{ vpc_id }}"
+
+        region: "{{ region }}"
+        rules:
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 80
+            to_port: 80
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 443
+            to_port: 443
+            cidr_ip: 0.0.0.0/0
+
+        rules_egress:
+          - proto: tcp
+            from_port: 80
+            to_port: 80
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 443
+            to_port: 443
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            cidr_ip: 0.0.0.0/0
+
+      register: IAAC_security
+
+
+    - name: Set Internet Gateway ID in variable
+      local_action:
+        module: set_fact
+        IAAC_security_id: "{{ IAAC_security.group_id }}"

@@ -1,0 +1,33 @@
+################################################################################
+#                               initiating  Load Balancer
+#############################################################################
+
+    - name: launch load balancer
+      local_action:
+        module:  ec2_elb_lb
+        name: "{{ app_name }}"
+        region: "{{ region }}"
+        state: "present"
+        subnets:
+          - "{{ public_IAAC_az1_id }}"
+          - "{{ public_IAAC_az2_id }}"
+        connection_draining_timeout: "60"
+        listeners:
+          - protocol: "http"
+            load_balancer_port: "80"
+            instance_port: "80"
+         # - protocol: "https"
+         #   load_balancer_port: "443"
+         #   instance_port: "443"
+         # - protocol: "ssh"
+          #  load_balancer_port: "22"
+          #  instance_port: "22"
+
+        health_check:
+            ping_protocol: "tcp" # options are http, https, ssl, tcp
+            ping_port: "80"
+            ping_path: "/" # only for http not for tcp or ssl
+            response_timeout: "5" # the value given is in seconds
+            interval: "30" # seconds
+            unhealthy_threshold: "5"
+            healthy_threshold: "5"

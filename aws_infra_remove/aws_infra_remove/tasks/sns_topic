@@ -1,0 +1,25 @@
+######################################################################################################3
+#               delete sns topic
+#################################################################################################
+
+- name: delete alarm SNS topic
+  local_action:
+    module: sns_topic
+    name: "IAAC_sns"
+    region: "{{ region }}"
+    state: "absent"
+    display_name: "alarm SNS topic"
+    delivery_policy:
+      http:
+        defaultHealthyRetryPolicy:
+            minDelayTarget: 0
+            maxDelayTarget: 0
+            numRetries: 0
+            numMaxDelayRetries: 0
+            backoffFunction: "linear"
+        disableSubscriptionOverrides: True
+        defaultThrottlePolicy:
+             maxReceivesPerSecond: 0
+    subscriptions:
+      - endpoint: ""
+        protocol: ""
