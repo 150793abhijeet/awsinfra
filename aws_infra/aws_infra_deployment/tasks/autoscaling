@@ -15,6 +15,6 @@
         vpc_zone_identifier: "{{ public_IAAC_az1_id }} , {{  public_IAAC_az2_id }}" #| join(',') }}"
         health_check_type: EC2
         health_check_period: 300
-        resource_tags:
-          Name: "{{ app_name }}"
+       # resource_tags:
+       #   Name: "{{ app_name }}"
       register: "IAAC_Scaling_group"
