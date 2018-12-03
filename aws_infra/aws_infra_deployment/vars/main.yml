@@ -40,7 +40,7 @@ instance_type: t2.micro
 
 security_group: IAAC
 
-image:  ami-d74be5b8
+image:  ami-0b500ef59d8335eee
 
 region: us-east-2
 
