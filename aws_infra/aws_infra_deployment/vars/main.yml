@@ -44,7 +44,7 @@ image:  ami-0b500ef59d8335eee
 
 region: us-east-2
 
-keypair: IAAC_Frankfut
+keypair: Abhijeet_WK
 
 count: 1
 
