@@ -26,7 +26,7 @@
         vpc_id: "{{ vpc_id }}"
         region: "{{ region }}"
         tags:
-          Name: Private
+          Name: Public
         subnets:
           - "{{ public_IAAC_az1_id }}"
           - "{{ public_IAAC_az2_id }}"
