@@ -42,7 +42,7 @@
 #        module: set_fact
 #        private_IAAC_az1_id: "{{ private_IAAC_az1.subnet.id }}"
 
-- name: Create Public Subnet [AZ-2]
+    - name: Create Public Subnet [AZ-2]
       local_action:
         module: ec2_vpc_subnet
         state: "present"
