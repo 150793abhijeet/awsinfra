@@ -21,27 +21,28 @@
         public_IAAC_az1_id: "{{ public_IAAC_az1.subnet.id }}"
 
 ##Creating  Private Subnet in [AZ1]
-
-    - name: Create Private Subnet [AZ-1]
-      local_action:
-        module: ec2_vpc_subnet
-        state: "present"
-        vpc_id: "{{ vpc_id }}"
-        cidr: "10.0.20.0/24"
-        az: "{{ region }}a"
-        region: "{{ region }}"
-        resource_tags:
-          Name: "IAAC_Private_Subnet_AZ1"
-      register: private_IAAC_az1
+#
+#    - name: Create Private Subnet [AZ-1]
+#      local_action:
+#        module: ec2_vpc_subnet
+#        state: "present"
+#        vpc_id: "{{ vpc_id }}"
+#        cidr: "10.0.20.0/24"
+#        az: "{{ region }}a"
+#        region: "{{ region }}"
+#        resource_tags:
+#          Name: "IAAC_Private_Subnet_AZ1"
+#      register: private_IAAC_az1
 
 # Saving  the id of the Public Subnet in a new variable.
 #
 
-    - name: Set Private Subnet ID in variable [AZ-1]
-      local_action:
-        module: set_fact
-        private_IAAC_az1_id: "{{ private_IAAC_az1.subnet.id }}"
-    - name: Create Public Subnet [AZ-2]
+#    - name: Set Private Subnet ID in variable [AZ-1]
+#      local_action:
+#        module: set_fact
+#        private_IAAC_az1_id: "{{ private_IAAC_az1.subnet.id }}"
+
+- name: Create Public Subnet [AZ-2]
       local_action:
         module: ec2_vpc_subnet
         state: "present"
@@ -61,20 +62,20 @@
         public_IAAC_az2_id: "{{ public_IAAC_az2.subnet.id }}"
 
 # Creating  Private Subnet for AZ2
+#
+#    - name: Create Private Subnet [AZ-2]
+#      local_action:
+#        module: ec2_vpc_subnet
+#        state: "present"
+#        vpc_id: "{{ vpc_id }}"
+#        cidr: "10.0.40.0/24"
+#        az: "{{ region }}b"
+#        region: "{{ region }}"
+#        resource_tags:
+ #         Name: "IAAC_Private_Subnet_AZ2"
+ #     register: private_IAAC_az2
 
-    - name: Create Private Subnet [AZ-2]
-      local_action:
-        module: ec2_vpc_subnet
-        state: "present"
-        vpc_id: "{{ vpc_id }}"
-        cidr: "10.0.40.0/24"
-        az: "{{ region }}b"
-        region: "{{ region }}"
-        resource_tags:
-          Name: "IAAC_Private_Subnet_AZ2"
-      register: private_IAAC_az2
-
-    - name: Set Private Subnet ID in variable [AZ-2]
-      local_action:
-        module: set_fact
-        private_IAAC_az2_id: "{{ private_IAAC_az2.subnet.id }}"
+ #   - name: Set Private Subnet ID in variable [AZ-2]
+ #     local_action:
+ #       module: set_fact
+ #       private_IAAC_az2_id: "{{ private_IAAC_az2.subnet.id }}"
